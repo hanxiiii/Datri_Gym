@@ -174,7 +174,10 @@
       padding: 0 1rem;
       border: 1px solid rgba(234, 215, 164, .5);
       border-radius: 999px;
+      cursor: pointer;
       color: var(--gold-soft);
+      background: transparent;
+      font: inherit;
       font-size: .78rem;
       font-weight: 900;
       text-transform: uppercase;
@@ -323,6 +326,7 @@
       padding: 0 1.15rem;
       border: 1px solid transparent;
       border-radius: 999px;
+      cursor: pointer;
       font-size: .85rem;
       font-weight: 950;
       letter-spacing: .08em;
@@ -836,10 +840,14 @@
 
     /* Training Anfrage Card */
     .anfrage-card {
+      width: 100%;
       margin-top: 2rem;
       padding: 0;
       border: 1px solid rgba(199, 168, 102, .3);
       border-radius: .65rem;
+      color: inherit;
+      font: inherit;
+      text-align: left;
       background: linear-gradient(145deg, rgba(199, 168, 102, .1), rgba(255, 255, 255, .025));
       box-shadow: var(--shadow);
       cursor: pointer;
@@ -948,6 +956,182 @@
 
     .anfrage-form textarea {
       resize: none;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .contact-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      place-items: center;
+      padding: clamp(1rem, 4vw, 2rem);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .28s var(--ease), visibility .28s var(--ease);
+    }
+
+    .contact-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .contact-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      border: 0;
+      cursor: pointer;
+      background: rgba(5, 5, 5, .74);
+      backdrop-filter: blur(12px);
+    }
+
+    .contact-panel {
+      position: relative;
+      width: min(34rem, 100%);
+      max-height: min(45rem, calc(100svh - 2rem));
+      overflow: auto;
+      border: 1px solid rgba(234, 215, 164, .28);
+      border-radius: .8rem;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(199, 168, 102, .16), transparent 14rem),
+        linear-gradient(145deg, #17110f, #080706 72%);
+      box-shadow: 0 32px 110px rgba(0, 0, 0, .65);
+      transform: translate3d(0, 24px, 0) scale(.98);
+      transition: transform .35s var(--ease);
+    }
+
+    .contact-modal.is-open .contact-panel {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .contact-panel-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding: clamp(1.2rem, 4vw, 1.8rem);
+      border-bottom: 1px solid rgba(244, 238, 228, .12);
+    }
+
+    .contact-panel-header p {
+      margin: 0 0 .45rem;
+      color: var(--gold-soft);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .contact-panel-header h2 {
+      margin: 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(2rem, 7vw, 3.4rem);
+      line-height: .9;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .contact-close {
+      display: grid;
+      place-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid rgba(244, 238, 228, .18);
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--warm);
+      background: rgba(255, 255, 255, .04);
+      font-size: 1.4rem;
+      line-height: 1;
+      transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+    }
+
+    .contact-close:hover {
+      color: var(--black);
+      border-color: var(--gold-soft);
+      background: var(--gold-soft);
+    }
+
+    .contact-panel-body {
+      display: grid;
+      gap: 1rem;
+      padding: clamp(1.2rem, 4vw, 1.8rem);
+    }
+
+    .contact-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .7rem;
+    }
+
+    .contact-option {
+      display: grid;
+      gap: .2rem;
+      padding: .9rem;
+      border: 1px solid rgba(244, 238, 228, .13);
+      border-radius: .55rem;
+      background: rgba(255, 255, 255, .035);
+    }
+
+    .contact-option span {
+      color: rgba(244, 238, 228, .54);
+      font-size: .72rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .contact-option strong {
+      color: var(--warm);
+      font-size: .95rem;
+      line-height: 1.3;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: .7rem;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: .85rem 1rem;
+      border: 1px solid rgba(244, 238, 228, .16);
+      border-radius: .45rem;
+      outline: none;
+      color: var(--warm);
+      background: rgba(5, 5, 5, .48);
+      font-size: .9rem;
+      transition: border-color .25s var(--ease), background .25s var(--ease);
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(244, 238, 228, .4);
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: var(--gold);
+      background: rgba(5, 5, 5, .64);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 6rem;
+    }
+
+    .contact-note {
+      margin: 0;
+      color: rgba(244, 238, 228, .56);
+      font-size: .78rem;
+      line-height: 1.5;
     }
 
     footer {
@@ -1098,13 +1282,19 @@
         margin: 0 auto .15rem 0;
       }
       .hero-figure {
-        left: 30%;
-        top: -3%;
-        width: 26rem;
+        left: auto;
+        right: -5.8rem;
+        top: clamp(-5.8rem, -8svh, -3.6rem);
+        width: clamp(31rem, 126vw, 37rem);
         min-width: 18rem;
-        height: 92svh;
-        transform: translate(-10%, 0);
-        opacity: .68;
+        height: calc(100svh + 8rem);
+        transform: none;
+        opacity: .72;
+      }
+      .fighter-silhouette {
+        object-position: top right;
+        transform: translateY(-2rem) scale(1.04);
+        transform-origin: top right;
       }
       .hero-bottom {
         display: flex;
@@ -1212,6 +1402,27 @@
       .anfrage-form textarea {
         font-size: .84rem;
         padding: .7rem .9rem;
+      }
+      .contact-modal {
+        padding: .75rem;
+        align-items: end;
+      }
+      .contact-panel {
+        width: 100%;
+        max-height: calc(100svh - 1.5rem);
+        border-radius: .7rem;
+      }
+      .contact-panel-header,
+      .contact-panel-body {
+        padding: 1.1rem;
+      }
+      .contact-close {
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+      .contact-options,
+      .form-row {
+        grid-template-columns: 1fr;
       }
 
       /* ── Impact ──────────────────────────────────────── */
@@ -1332,7 +1543,7 @@
         <a href="#trainer">Trainer</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <a class="nav-cta" href="mailto:office@datri-companygroup.at">Anfragen</a>
+      <button class="nav-cta" type="button" data-contact-open>Anfragen</button>
     </div>
   </header>
 
@@ -1355,7 +1566,7 @@
           <div class="hero-bottom reveal from-left">
             <p class="hero-copy">DATRI Privat Gym verbindet exklusives Boxtraining, mentale Stärke und eine klare soziale Mission: Gemeinsam zum Schutz unserer Kinder.</p>
             <div class="actions" aria-label="Aktionen">
-              <a class="btn btn-primary" href="mailto:office@datri-companygroup.at?subject=Training%20anfragen">Training anfragen</a>
+              <button class="btn btn-primary" type="button" data-contact-open>Training anfragen</button>
               <a class="btn btn-secondary" href="#impact">Initiative unterstützen</a>
             </div>
           </div>
@@ -1415,7 +1626,7 @@
             <video src="./clip-short.mp4" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>
           </div>
         </div>
-        <div class="anfrage-card reveal" style="margin-top: 3rem;" onclick="this.classList.toggle('is-open')">
+        <button class="anfrage-card reveal" type="button" style="margin-top: 3rem;" data-contact-open>
           <div class="anfrage-card-header">
             <div class="anfrage-card-body">
               <h3>Training anfragen</h3>
@@ -1423,17 +1634,7 @@
             </div>
             <div class="anfrage-card-arrow" aria-hidden="true">&#8599;</div>
           </div>
-          <div class="anfrage-form" onclick="event.stopPropagation()">
-            <form action="mailto:office@datri-companygroup.at" method="post" enctype="text/plain">
-              <div class="form-row">
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="tel" name="telefon" placeholder="Telefon / E-Mail" required>
-              </div>
-              <textarea name="nachricht" rows="3" placeholder="Was interessiert dich? (Boxen, Kickboxen, Kinder-Training, ...)"></textarea>
-              <button type="submit" class="btn btn-primary" style="width:100%; margin-top:.4rem;">Anfrage senden</button>
-            </form>
-          </div>
-        </div>
+        </button>
       </div>
     </section>
 
@@ -1534,7 +1735,7 @@
         <h2 class="section-title">Werde Teil der Bewegung.</h2>
         <p class="lead">Trainiere mit Haltung, unterstütze die Initiative oder nimm Kontakt mit dem DATRI Privat Gym auf.</p>
         <div class="actions" style="justify-content:center; margin-top: 2rem;">
-          <a class="btn btn-primary" href="mailto:office@datri-companygroup.at?subject=Training%20anfragen">Training anfragen</a>
+          <button class="btn btn-primary" type="button" data-contact-open>Training anfragen</button>
           <a class="btn btn-secondary" href="tel:+436605749013">+43 660 5749013</a>
         </div>
         <div class="contact-strip" aria-label="Vereinsdaten">
@@ -1552,6 +1753,47 @@
       <span>Gemeinnütziger privater Box- und Kampfsportverein in Wien. Konto: AT14 2011 1841 4344 5700, Erste Bank.</span>
     </div>
   </footer>
+
+  <div class="contact-modal" id="contactModal" aria-hidden="true">
+    <button class="contact-modal-backdrop" type="button" data-contact-close aria-label="Kontakt schließen"></button>
+    <div class="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+      <div class="contact-panel-header">
+        <div>
+          <p>Kontakt</p>
+          <h2 id="contactTitle">Training anfragen</h2>
+        </div>
+        <button class="contact-close" type="button" data-contact-close aria-label="Kontakt schließen">&times;</button>
+      </div>
+      <div class="contact-panel-body">
+        <div class="contact-options" aria-label="Direkter Kontakt">
+          <a class="contact-option" href="tel:+436605749013">
+            <span>Telefon</span>
+            <strong>+43 660 5749013</strong>
+          </a>
+          <a class="contact-option" href="mailto:office@datri-companygroup.at">
+            <span>E-Mail</span>
+            <strong>office@datri-companygroup.at</strong>
+          </a>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="kontakt" placeholder="Telefon oder E-Mail" required>
+          </div>
+          <select name="interesse" required>
+            <option value="">Interesse auswählen</option>
+            <option value="Boxtraining">Boxtraining</option>
+            <option value="Kickboxen">Kickboxen</option>
+            <option value="Kinder-Training">Kinder-Training</option>
+            <option value="Mentales Coaching">Mentales Coaching</option>
+          </select>
+          <textarea name="nachricht" placeholder="Nachricht" required></textarea>
+          <button class="btn btn-primary" type="submit">Anfrage senden</button>
+        </form>
+        <p class="contact-note">Nach dem Absenden wird eine vorbereitete E-Mail geöffnet, damit du die Anfrage direkt verschicken kannst.</p>
+      </div>
+    </div>
+  </div>
 
   <script>
     const revealItems = document.querySelectorAll(".reveal");
@@ -1577,6 +1819,10 @@
     const parallaxItems = document.querySelectorAll("[data-parallax]");
     const siteHeader = document.querySelector(".site-header");
     const logoPaths = document.querySelectorAll(".logo-draw path");
+    const contactModal = document.querySelector("#contactModal");
+    const contactOpenButtons = document.querySelectorAll("[data-contact-open]");
+    const contactCloseButtons = document.querySelectorAll("[data-contact-close]");
+    const contactForm = document.querySelector("#contactForm");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let logoAnimated = false;
     let ticking = false;
@@ -1601,7 +1847,12 @@
     function updateParallax() {
       if (reduceMotion) return;
       const scrollY = window.scrollY;
+      const isMobileHero = window.matchMedia("(max-width: 520px)").matches;
       parallaxItems.forEach((item) => {
+        if (isMobileHero && item.classList.contains("hero-figure")) {
+          item.style.transform = "";
+          return;
+        }
         const speed = Number(item.dataset.parallax || 0);
         item.style.transform = `translate3d(0, ${scrollY * speed * -0.18}px, 0)`;
       });
@@ -1630,6 +1881,51 @@
       });
     }, { threshold: 0.3 });
     videos.forEach((v) => videoObserver.observe(v));
+
+    function openContactModal() {
+      contactModal.classList.add("is-open");
+      contactModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      const firstInput = contactModal.querySelector("input");
+      window.setTimeout(() => firstInput?.focus(), 80);
+    }
+
+    function closeContactModal() {
+      contactModal.classList.remove("is-open");
+      contactModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    contactOpenButtons.forEach((button) => {
+      button.addEventListener("click", openContactModal);
+    });
+
+    contactCloseButtons.forEach((button) => {
+      button.addEventListener("click", closeContactModal);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && contactModal.classList.contains("is-open")) {
+        closeContactModal();
+      }
+    });
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(contactForm);
+      const body = [
+        `Name: ${formData.get("name")}`,
+        `Kontakt: ${formData.get("kontakt")}`,
+        `Interesse: ${formData.get("interesse")}`,
+        "",
+        String(formData.get("nachricht") || "")
+      ].join("\n");
+      const mailto = new URL("mailto:office@datri-companygroup.at");
+      mailto.searchParams.set("subject", "Training anfragen");
+      mailto.searchParams.set("body", body);
+      window.location.href = mailto.toString();
+      closeContactModal();
+    });
 
     updateHeader();
     updateParallax();
